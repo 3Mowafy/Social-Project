@@ -1,3 +1,5 @@
 const postModel = require("../models/post.model");
-class Post {}
+class Post {
+    
+}
 module.exports = Post;

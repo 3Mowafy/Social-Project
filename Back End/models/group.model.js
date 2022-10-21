@@ -1,20 +1,22 @@
 const mongoose = require("mongoose");
 
-const groupSchema = mongoose.Schema({
-    name: {
-        type: String,
-        trim: true,
+const groupSchema = mongoose.Schema(
+    {
+        name: {
+            type: String,
+            trim: true,
+        },
+        description: {
+            type: String,
+            trim: true,
+        },
+        coverImg: {
+            type: String,
+            trim: true,
+        },
     },
-    description: {
-        type: String,
-        trim: true,
-    },
-    coverImg: {
-        type: String,
-        trim: true,
-    },
-    posts: [],
-});
+    { timestamps: true }
+);
 
 const group = mongoose.model("Group", groupSchema);
 

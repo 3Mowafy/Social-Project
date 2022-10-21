@@ -1,0 +1,10 @@
+{
+    "email": "3mowafy@gmail.com",
+    "password": "Mohamed12344",
+    "firstName": "Mohamed",
+    "lastName": "Mowafy",
+    "age": "23",
+    "gender": "Male"
+}
+
+________________&&________________

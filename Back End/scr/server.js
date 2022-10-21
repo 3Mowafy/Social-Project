@@ -11,9 +11,9 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cors());
 
-const groupRoute = require("../routes/group.model");
-const postpRoute = require("../routes/post.model");
-const userRoute = require("../routes/user.model");
+const groupRoute = require("../routes/group.route");
+const postpRoute = require("../routes/post.route");
+const userRoute = require("../routes/user.route");
 
 server.use("/api/group", groupRoute);
 server.use("/api/post", postpRoute);
