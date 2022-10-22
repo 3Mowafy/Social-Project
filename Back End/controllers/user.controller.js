@@ -1,5 +1,7 @@
 const userModel = require("../models/user.model");
 const { resBuilder } = require("../helper/help.helper");
+
+
 class User {
     static addUser = async (req, res) => {
         try {
@@ -117,4 +119,5 @@ class User {
         }
     };
 }
+
 module.exports = User;

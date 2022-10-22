@@ -73,30 +73,11 @@ const userSchema = mongoose.Schema(
                 },
             },
         ],
-        stories: [
-            {
-                storyContent: {
-                    type: String,
-                    trim: true,
-                },
-                storyImg: {
-                    type: String,
-                    trim: true,
-                },
-            },
-        ],
         notifications: [
             {
                 notification: {
                     type: String,
                     trim: true,
-                },
-            },
-        ],
-        friends: [
-            {
-                friend: {
-                    type: mongoose.Schema.Types.ObjectId,
                 },
             },
         ],
@@ -114,6 +95,9 @@ const userSchema = mongoose.Schema(
 
 userSchema.methods.toJSON = function () {
     const userData = this.toObject();
+    delete userData.password;
+    delete userData.__v;
+    delete userData.tokens;
     return userData;
 };
 
