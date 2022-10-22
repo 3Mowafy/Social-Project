@@ -2,33 +2,47 @@ const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema(
     {
+        groupId: {
+            type: mongoose.Schema.Types.ObjectId,
+        },
         userId: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
         },
         content: {
             type: String,
             trim: true,
             required: true,
         },
+        postImg: {
+            type: String,
+            trim: true,
+            default: "",
+        },
         likes: [
             {
                 like: {
-                    type: mongoose.Schema.Types.ObjectId,
+                    userId: mongoose.Schema.Types.ObjectId,
                 },
             },
         ],
         comments: [
             {
+                userId: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    required: true,
+                },
                 comment: {
                     type: String,
                     trim: true,
                 },
+                commentImg: {
+                    type: String,
+                    trim: true,
+                    default: "",
+                },
             },
         ],
-        share: {
-            type: String,
-            trim: true,
-        },
     },
     { timestamps: true }
 );
