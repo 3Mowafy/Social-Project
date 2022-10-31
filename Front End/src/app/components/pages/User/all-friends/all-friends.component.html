@@ -1,0 +1,37 @@
+<div class="card mx-auto mt-5 p-3">
+  <h4
+    class="border-bottom border-3 border-dark mb-5"
+    [ngStyle]="{ width: 'fit-content' }"
+  >
+    All Users
+  </h4>
+  <div class="row">
+    <div class="col-12">
+      <div class="container">
+        <div class="row">
+          <div class="card">
+            <div class="body">
+              <ul class="new_friend_list list-unstyled row">
+                <li
+                  class="col-lg-4 col-md-2 col-sm-6 col-4 text-center"
+                  *ngFor="let user of allusers"
+                >
+                  <a routerLink="/user/{{user?.['_id']}}">
+                    <img
+                      [src]="_data.serverUrl + user?.['profileImg']"
+                      class="usersImage"
+                      alt="User Image"
+                    />
+                    <h6 class="users_name">
+                      {{user?.['firstName']}} {{user?.['lastName']}}
+                    </h6>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

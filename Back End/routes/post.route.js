@@ -9,21 +9,16 @@ router.delete("/removePost/:id", auth, Post.removePost);
 
 router.post("/sharePost/:id", auth, Post.sharePost);
 
-router.post("/addRemoveLike/:id", auth, Post.addRemoveLike);
+router.get("/addRemoveLike/:id", auth, Post.addRemoveLike);
 
 router.post("/addComment/:id", auth, upload.single("img"), Post.addComment);
+
 router.patch(
-    "/editComment/:id/:commentId",
-    auth,
-    upload.single("img"),
-    Post.editComment
+  "/editComment/:id/:commentId",
+  auth,
+  upload.single("img"),
+  Post.editComment
 );
-// router.patch(
-//     "/editCommentImg/:id/:commentId",
-//     auth,
-//     upload.single("img"),
-//     Post.editCommentImg
-// );
 router.delete("/removeComment/:id/:commentId", auth, Post.removeComment);
 
 router.get("/posts", Post.showPosts);

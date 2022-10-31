@@ -1,0 +1,62 @@
+.card {
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  background: #fff;
+  border-radius: 0.1875rem;
+  margin-bottom: 30px;
+  border: 0;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  box-shadow: none;
+}
+
+.usersImage {
+  width: 100px;
+  height: 100px;
+}
+
+.theme-purple .card .header h2 strong {
+  color: #6572b8;
+}
+
+.card .body {
+  color: #424242;
+  font-weight: 400;
+}
+.new_friend_list {
+  margin-bottom: 0px;
+}
+
+.new_friend_list li {
+  transition: 0.5s ease-in;
+}
+
+.new_friend_list li:hover {
+  transform: scale(1.2);
+}
+
+.new_friend_list li:hover a {
+  text-decoration: underline;
+}
+
+.new_friend_list li .users_name {
+  font-size: 10px;
+  font-weight: bold;
+  color: #424242;
+  text-transform: capitalize;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a {
+  outline: none !important;
+  color: #000;
+  text-decoration: none;
+  background-color: transparent;
+}

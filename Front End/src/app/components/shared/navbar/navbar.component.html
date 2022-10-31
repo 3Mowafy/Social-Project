@@ -1,0 +1,91 @@
+<nav
+  class="navbar navbar-expand-lg bg-dark navbar-dark p-0 sticky-top"
+  *ngIf="_data?.userData"
+>
+  <div class="container">
+    <a class="navbar-brand text-white fw-bold" routerLink="">Mowafy Society</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#Navbar"
+      aria-controls="Navbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="Navbar">
+      <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+        <li class="nav-item">
+          <div class="dropdown">
+            <button
+              class="btn btn-dark"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{_data.userData?.['firstName']}}
+              {{_data.userData?.['lastName']}}
+              <img
+                class="profile-img rounded-circle ms-2"
+                [src]="_data.serverUrl+_data.userData?.['profileImg']"
+                alt="profileImg"
+              />
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark w-100">
+              <li class="nav-item">
+                <a
+                  class="dropdown-item"
+                  routerLink="user"
+                  *ngIf="_data?.userData"
+                  >My Profile<img
+                    class="my-profile-img rounded-circle ms-3"
+                    [src]="_data.serverUrl+_data.userData?.['profileImg']"
+                    alt="profileImg"
+                /></a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="dropdown-item"
+                  routerLink="editprofile"
+                  *ngIf="_data?.userData"
+                  >Edit Profile</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="dropdown-item"
+                  routerLink=""
+                  *ngIf="_data.userData"
+                  (click)="logout()"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/register"
+            *ngIf="!_data.isLoggedIn"
+            >Register</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/login"
+            *ngIf="!_data.userData"
+            >Login</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

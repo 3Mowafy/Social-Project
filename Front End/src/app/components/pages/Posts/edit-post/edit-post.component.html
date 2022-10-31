@@ -1,0 +1,33 @@
+<section class="container mt-5">
+  <div class="card mx-auto">
+    <form [formGroup]="editPost" (ngSubmit)="editPostMethod()">
+      <div class="card-header fw-bold">Edit Post</div>
+      <div class="card-body">
+        <div class="card-text">
+          <textarea
+            class="form-control"
+            [value]="post?.['content']"
+            formControlName="content"
+          ></textarea>
+          <img
+            *ngIf="post?.['postImg'] !=''"
+            class="card-img post-image mt-4"
+            [src]="_auth.serverUrl + post?.['postImg']"
+            alt="Post Image"
+          />
+        </div>
+      </div>
+      <div
+        class="card-footer text-muted d-flex justify-content-between align-items-center px-4"
+      >
+        <div class="input">
+          <label for="file"
+            ><i class="fa-regular fa-file-image fa-2x text-primary"></i
+          ></label>
+          <input type="file" id="file" hidden (change)="addpostImg($event)" />
+        </div>
+        <button class="btn btn-primary">Post</button>
+      </div>
+    </form>
+  </div>
+</section>

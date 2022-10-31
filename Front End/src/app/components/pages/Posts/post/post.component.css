@@ -1,0 +1,57 @@
+.card {
+  width: 90%;
+}
+
+.date {
+  width: fit-content !important;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.loaded {
+  background: #191f26;
+  height: calc(100vh - 49px);
+}
+
+textarea {
+  resize: none;
+  height: 75px;
+}
+
+.input > label {
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.profile-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.post-image {
+  height: 450px;
+}
+
+.red-heart,
+.empty-heart:hover {
+  color: rgba(198, 17, 17, 0.819);
+  cursor: pointer;
+}
+
+.edit-rm-post,
+.like {
+  border: none;
+  background: transparent;
+}
+
+.fa-comment {
+  color: rgb(47, 47, 218);
+  cursor: pointer;
+}

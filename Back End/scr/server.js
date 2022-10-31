@@ -16,24 +16,25 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cors());
 
-const groupRoute = require("../routes/group.route");
-const postpRoute = require("../routes/post.route");
 const userRoute = require("../routes/user.route");
+const postRoute = require("../routes/post.route");
+const groupRoute = require("../routes/group.route");
 const storyRoute = require("../routes/story.route");
 const chatRoute = require("../routes/chat.route");
 const msgRoute = require("../routes/message.route");
 
-server.use("/api/group", groupRoute);
-server.use("/api/post", postpRoute);
 server.use("/api/user", userRoute);
-server.use("/api/story", storyRoute);
 server.use("/api/chat", chatRoute);
 server.use("/api/messages", msgRoute);
+server.use("/api/post", postRoute);
+server.use("/api/group", groupRoute);
+server.use("/api/story", storyRoute);
 
 server.all("*", (req, res) =>
     res
         .status(404)
         .send({ apiStatus: false, data: "", message: "Url Not Corrected" })
 );
+
 
 module.exports = serverHttp;

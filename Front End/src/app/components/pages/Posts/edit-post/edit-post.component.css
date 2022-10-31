@@ -1,0 +1,12 @@
+.post-image {
+  height: 400px;
+}
+
+.card {
+  width: 70%;
+}
+
+textarea {
+  resize: none;
+  height: 75px;
+}

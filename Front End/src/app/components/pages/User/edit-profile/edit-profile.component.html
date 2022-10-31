@@ -1,0 +1,95 @@
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-3 border-right">
+      <form class="d-flex flex-column align-items-center p-3 py-5">
+        <h5 class="mt-1">Edit Profile Image</h5>
+        <img
+          class="rounded-circle mt-5 profileImg"
+          [src]="_data.serverUrl + _data.userData?.['profileImg']"
+        />
+        <div class="mt-5"></div>
+        <input
+          class="form-control"
+          id="imgFile"
+          type="file"
+          (change)="addProfileImage($event)"
+        />
+        <p class="mt-3 bg-primary text-white p-2 rounded-pill">
+          only *.jpg images
+        </p>
+      </form>
+    </div>
+    <div class="col-md-5 border-right" [formGroup]="profileInfo">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Profile Settings</h4>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label class="labels">First Name</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="labels">Last Name</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+            />
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label class="labels">Email</label
+            ><input type="email" class="form-control" formControlName="email" />
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Age</label
+            ><input type="text" class="form-control" formControlName="age" />
+          </div>
+          <div class="mt-5 text-center">
+            <button
+              class="btn btn-primary profile-button"
+              type="button"
+              (click)="editProfile()"
+            >
+              Save Edits
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-danger p-1 text-center" *ngIf="msg != ''">
+        {{ msg }}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-3 py-5 text-center">
+        <h5>Edit Cover Image</h5>
+        <div class="text-center">
+          <img
+            class="mt-2 coverImg"
+            [src]="_data.serverUrl + _data.userData?.['coverImg']"
+          />
+          <input
+            class="form-control mt-2"
+            id="imgFile"
+            type="file"
+            (change)="addProfileCoverImage($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <a class="btn btn-danger mb-2 w-75 m-auto" (click)="showdelted()"
+      >Delete Account</a
+    >
+    <div class="w-50 m-auto p-2 mb-2 text-center" *ngIf="isDelted">
+      <p>Are You Sure?</p>
+      <a class="btn btn-danger px-3 me-3" (click)="deleteAccount()">yes</a>
+      <a class="btn btn-primary px-3" (click)="showdelted()">No</a>
+    </div>
+  </div>
+</div>

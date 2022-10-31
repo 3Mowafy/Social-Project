@@ -1,0 +1,208 @@
+<section class="container" *ngIf="isShow; else isLoaded">
+  <div class="row">
+    <div class="col-4">
+      <app-all-friends></app-all-friends>
+    </div>
+    <div class="col-8">
+      <div class="card mx-auto mt-5">
+        <form [formGroup]="addPost" (ngSubmit)="postAdded()">
+          <div class="card-header fw-bold">Add Post</div>
+          <div class="card-body">
+            <div class="card-text">
+              <textarea
+                class="form-control"
+                placeholder="What's on your mind?"
+                formControlName="content"
+              ></textarea>
+            </div>
+          </div>
+          <div
+            class="card-footer text-muted d-flex justify-content-between align-items-center px-4"
+          >
+            <div class="input">
+              <label for="file"
+                ><i class="fa-regular fa-file-image fa-2x text-primary"></i
+              ></label>
+              <input
+                type="file"
+                id="file"
+                hidden
+                (change)="addpostImg($event)"
+              />
+            </div>
+            <button class="btn btn-primary">Post</button>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="allPosts.length > 0">
+        <div class="card mx-auto my-5" *ngFor="let post of allPosts.reverse()">
+          <div
+            class="card-header d-flex justify-content-between align-items-center"
+          >
+            <div
+              class="profile-pic-name"
+              routerLink="/user/{{post?.['userId']}}"
+            >
+              <img
+                class="profile-img rounded-circle"
+                [src]="_posts.serverUrl + post.user?.['profileImg']"
+                alt="profile"
+              />
+              <span class="profile-name ms-2 fw-bold"
+                >{{ post.user?.['firstName'] }}
+                {{ post.user?.['lastName'] }}</span
+              >
+            </div>
+            <div
+              class="dropdown"
+              *ngIf="post?.userId == _auth.userData?.['_id']"
+            >
+              <button
+                class="edit-rm-post"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa-solid fa-ellipsis fa-2x"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    routerLink="editpost/{{ post?.['_id'] }}"
+                    >edit</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item delete"
+                    (click)="deletePost(post?.['_id'])"
+                    >delete</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-header bg-white border-0 ps-3">
+            <p class="m-0 p-0 date border-bottom">
+              {{ post?.['createdAt'] | date : 'longDate'}} at
+              {{ post?.['createdAt'] | date : 'mediumTime' }}
+            </p>
+          </div>
+          <div class="card-body">
+            <p class="card-text" *ngIf="post?.['content'] !='null'">
+              {{ post?.['content'] }}
+            </p>
+            <img
+              *ngIf="post?.['postImg'] !=''"
+              class="card-img post-image"
+              [src]="_posts.serverUrl + post?.['postImg']"
+              alt="Post Image"
+            />
+          </div>
+          <div
+            class="card-footer text-muted d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <button
+                class="like"
+                (click)="addRemoveLike(post?.['_id'])"
+                *ngIf="isLike != []"
+                title="Like"
+              >
+                <i class="fa-regular fa-heart me-3 fa-2x empty-heart"></i>
+              </button>
+              <span class="fw-bold fs-3">{{ post?.likes?.length }} </span>
+            </div>
+            <button
+              class="border-0 bg-transparent"
+              routerLink="single/{{post?.['_id']}}"
+            >
+              <i class="fa-solid fa-eye fa-2x" title="Show Post"></i>
+            </button>
+          </div>
+          <div class="card mx-auto w-100">
+            <form
+              [formGroup]="addcomment"
+              (ngSubmit)="commentAdded(post?.['_id'])"
+            >
+              <div class="card-body">
+                <div class="card-text">
+                  <textarea
+                    id="comment"
+                    class="form-control"
+                    placeholder="Add Comment...."
+                    formControlName="comment"
+                  ></textarea>
+                </div>
+              </div>
+              <div
+                class="card-footer text-muted d-flex justify-content-between align-items-center px-4"
+              >
+                <button class="border-0 bg-transparent">
+                  <i
+                    class="fa-regular fa-comment fa-2x"
+                    title="Add Comment"
+                  ></i>
+                </button>
+                <div class="input">
+                  <label for="file"
+                    ><i class="fa-regular fa-file-image fa-2x text-primary"></i
+                  ></label>
+                  <input
+                    type="file"
+                    id="file"
+                    hidden
+                    (change)="addCommentImg($event)"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div
+            class="card-footer"
+            *ngFor="let comment of post?.comments?.reverse()"
+          >
+            <div class="card-header">
+              <div
+                class="profile-pic-name"
+                routerLink="/user/{{comment?.usercomment?.['_id']}}"
+              >
+                <img
+                  class="profile-img rounded-circle"
+                  [src]="_posts.serverUrl + comment?.usercomment?.['profileImg']"
+                  alt="profile"
+                />
+                <span class="profile-name ms-2 fw-bold"
+                  >{{ comment?.usercomment?.['firstName'] }}
+                  {{ comment?.usercomment?.['lastName'] }}</span
+                >
+              </div>
+            </div>
+            <div class="card-body">{{ comment?.comment }}</div>
+            <div class="card-body" *ngIf="comment?.commentImg != ''">
+              <img
+                class="card-img post-image"
+                [src]="_posts.serverUrl + comment?.commentImg"
+                alt="profile"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!allPosts.length">
+        <div class="card mx-auto my-5">
+          <div class="card-body">
+            <p class="card-text text-center">There are no new posts....</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #isLoaded>
+  <div class="text-center loaded">
+    <img src="assets/imgs/loading.gif" alt="Loading" />
+  </div>
+</ng-template>

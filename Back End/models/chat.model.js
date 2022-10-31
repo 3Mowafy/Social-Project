@@ -2,7 +2,12 @@ const mongoose = require("mongoose");
 
 const chatSchema = mongoose.Schema(
     {
-        users: [{ type: mongoose.Schema.Types.ObjectId }],
+        users: [
+            {
+                chaterOne: { type: mongoose.Schema.Types.ObjectId },
+                chaterTwo: { type: mongoose.Schema.Types.ObjectId },
+            },
+        ],
     },
     { timestamps: true }
 );
