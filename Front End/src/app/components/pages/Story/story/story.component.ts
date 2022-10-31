@@ -58,14 +58,18 @@ export class StoryComponent implements OnInit {
       this.storyForm.reset();
       this.file = '';
       this.ngOnInit();
-      console.log(res);
     });
   }
 
   showStories() {
     this._story.showStory().subscribe((res) => {
       this.allStories = res.data;
-      console.log(this.allStories);
+    });
+  }
+
+  removeStory(id: any) {
+    this._story.removeStory(id).subscribe(() => {
+      this.ngOnInit();
     });
   }
 }

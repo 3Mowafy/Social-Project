@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class StoryService {
   _url = 'http://127.0.0.1:3000/api/story/';
-  public serverUrl = ' http://127.0.0.1:3000/';
+  public serverUrl = 'http://127.0.0.1:3000/';
   constructor(private _http: HttpClient) {}
 
   addStory(data: any): Observable<any> {
@@ -16,5 +16,9 @@ export class StoryService {
 
   showStory(): Observable<any> {
     return this._http.get(`${this._url}showStory`);
+  }
+
+  removeStory(id: any): Observable<any> {
+    return this._http.delete(`${this._url}removeStory/${id}`);
   }
 }

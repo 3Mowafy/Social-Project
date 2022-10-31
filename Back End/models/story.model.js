@@ -13,7 +13,13 @@ const storySchema = mongoose.Schema(
     storyImg: {
       type: String,
       trim: true,
-      default: "",
+      default: "defaults/story.webp",
+    },
+    createdAt: {
+      type: Date,
+      expires: 86400,
+      index: true,
+      default: Date.now,
     },
   },
   { timestamps: true }

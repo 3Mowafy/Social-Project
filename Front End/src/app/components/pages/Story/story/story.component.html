@@ -32,21 +32,22 @@
         </form>
       </div>
     </ng-template>
-    <ng-template carouselSlide>
-      <div class="card" *ngFor="let story of allStories">
+    <ng-template carouselSlide *ngFor="let story of allStories">
+      <div class="card position-relative">
+        <a
+          class="position-absolute text-dark"
+          (click)="removeStory(story?.['_id'])"
+          ><i class="fa-solid fa-trash fs-4 p-2 delete bg-white rounded"></i
+        ></a>
         <img
           *ngIf="story?.['storyImg'] !=''"
           [src]="_story.serverUrl + story?.storyImg"
-          class="card-img-top"
+          class="card-img h-100 rounded"
           alt="Story Img"
         />
-        {{ _story.serverUrl }}{{ story?.storyImg }}
-        <div class="card-body">
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
+        <p class="position-absolute content">
+          {{ story?.content }}
+        </p>
       </div>
     </ng-template>
   </owl-carousel-o>
