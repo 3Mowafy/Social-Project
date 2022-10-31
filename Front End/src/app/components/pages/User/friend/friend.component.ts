@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Post } from 'src/app/interfaces/post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostsService } from 'src/app/services/posts.service';
@@ -89,12 +90,12 @@ export class FriendComponent implements OnInit {
   }
 
   showMyPosts() {
-    this._posts.myPosts().subscribe(
-      (res) => {
+    this._posts.myPosts().subscribe({
+      next: (res) => {
         this.allPosts = res.data;
       },
-      () => {},
-      () => {
+      error: () => {},
+      complete: () => {
         this.allPosts.forEach((p) => {
           this._data.singleUser(p.userId).subscribe((res) => {
             p.user = res.data;
@@ -105,7 +106,7 @@ export class FriendComponent implements OnInit {
             });
           });
         });
-      }
-    );
+      },
+    });
   }
 }

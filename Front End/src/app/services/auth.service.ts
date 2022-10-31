@@ -14,11 +14,7 @@ export class AuthService {
   public isLoggedIn = false;
   public userData = null;
   public serverUrl = 'http://127.0.0.1:3000/';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
+
   register(data: any): Observable<any> {
     return this._http.post(`${this._url}register`, data);
   }

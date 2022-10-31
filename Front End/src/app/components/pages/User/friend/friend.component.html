@@ -19,10 +19,10 @@
         <div class="text-center profile">
           <img
             class="rounded-circle imgProfile"
-            src="{{ _data.serverUrl }}{{ profileInfo.profileImg }}"
+            src="{{ _data.serverUrl }}{{ profileInfo?.profileImg }}"
           />
           <p class="fw-bold mt-4 profileName text-white">
-            {{ profileInfo.firstName }} {{ profileInfo.lastName }}
+            {{ profileInfo?.firstName }} {{ profileInfo?.lastName }}
           </p>
         </div>
       </div>

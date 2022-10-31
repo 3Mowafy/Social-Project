@@ -14,16 +14,16 @@ export class HomeComponent implements OnInit {
   }
 
   navShow() {
-    this._data.profile().subscribe(
-      (d) => {
+    this._data.profile().subscribe({
+      next: (d) => {
         this._data.isLoggedIn = true;
         this._data.userData = d.data;
       },
-      () => {
+      error: () => {
         this._data.isLoggedIn = false;
         this._data.userData = null;
       },
-      () => (this.isShow = true)
-    );
+      complete: () => (this.isShow = true),
+    });
   }
 }

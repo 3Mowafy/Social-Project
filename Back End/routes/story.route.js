@@ -5,8 +5,8 @@ const upload = require("../middleware/upload.middleware");
 
 router.post("/addStory", auth, upload.single("img"), Story.addStory);
 
-// router.delete("/removeStoryDynamic", Story.removeStoryDynamic);
-
 router.delete("/removeStory/:id", auth, Story.removeStory);
+
+router.get("/showStory", auth, Story.showStory);
 
 module.exports = router;

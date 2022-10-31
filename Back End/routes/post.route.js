@@ -3,11 +3,14 @@ const Post = require("../controllers/post.controller");
 const { auth } = require("../middleware/auth.middleware");
 const upload = require("../middleware/upload.middleware");
 
+router.post("", (req, res) => {
+  res.send("Hello");
+});
 router.post("/addPost", auth, upload.single("img"), Post.addPost);
 router.patch("/editPost/:id", auth, upload.single("img"), Post.editPost);
 router.delete("/removePost/:id", auth, Post.removePost);
 
-router.post("/sharePost/:id", auth, Post.sharePost);
+router.get("/sharePost/:id", auth, Post.sharePost);
 
 router.get("/addRemoveLike/:id", auth, Post.addRemoveLike);
 

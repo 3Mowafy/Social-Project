@@ -1,5 +1,10 @@
 <section class="container" *ngIf="isShow; else isLoaded">
   <div class="row">
+    <div class="col">
+      <app-story></app-story>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-4">
       <app-all-friends></app-all-friends>
     </div>
@@ -45,7 +50,7 @@
             >
               <img
                 class="profile-img rounded-circle"
-                [src]="_posts.serverUrl + post.user?.['profileImg']"
+                src="{{ _posts.serverUrl }}{{post.user?.['profileImg']}}"
                 alt="profile"
               />
               <span class="profile-name ms-2 fw-bold"
@@ -145,9 +150,18 @@
                     title="Add Comment"
                   ></i>
                 </button>
+                <a (click)="sharePost(post?.['_id'])"
+                  ><i
+                    class="fa-solid fa-share-from-square fs-4 text-primary share"
+                    title="Share"
+                  ></i
+                ></a>
                 <div class="input">
                   <label for="file"
-                    ><i class="fa-regular fa-file-image fa-2x text-primary"></i
+                    ><i
+                      class="fa-regular fa-file-image fa-2x text-primary"
+                      title="Add Image"
+                    ></i
                   ></label>
                   <input
                     type="file"
@@ -159,11 +173,14 @@
               </div>
             </form>
           </div>
+          <h4 class="text-center border-top border-dark">Comments</h4>
           <div
-            class="card-footer"
+            class="card-footer border-bottom border-dark dashed"
             *ngFor="let comment of post?.comments?.reverse()"
           >
-            <div class="card-header">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
               <div
                 class="profile-pic-name"
                 routerLink="/user/{{comment?.usercomment?.['_id']}}"
@@ -178,7 +195,74 @@
                   {{ comment?.usercomment?.['lastName'] }}</span
                 >
               </div>
+              <div
+                class="dropdown"
+                *ngIf="comment?.userId == _auth.userData?.['_id']"
+              >
+                <button
+                  class="edit-rm-post"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fa-solid fa-ellipsis fs-5"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item delete"
+                      (click)="removeComment(post?.['_id'],comment?.['_id'])"
+                      >delete</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
+            <div
+              class="card mx-auto w-100"
+              *ngIf="comment?.userId == _auth.userData?.['_id']"
+            >
+              <form
+                [formGroup]="editCommentValue"
+                (ngSubmit)="editCommentMethod(post?.['_id'],comment?.['_id'])"
+              >
+                <div class="card-body">
+                  <div class="card-text">
+                    <textarea
+                      id="comment"
+                      class="form-control"
+                      placeholder="{{comment?.['comment']}}"
+                      formControlName="comment"
+                    ></textarea>
+                  </div>
+                </div>
+                <div
+                  class="card-footer text-muted d-flex justify-content-between align-items-center px-4"
+                >
+                  <button class="border-0 bg-transparent">
+                    <i
+                      class="fa-regular fa-comment fa-2x"
+                      title="Edit Comment"
+                    ></i>
+                  </button>
+
+                  <div class="input">
+                    <label for="file"
+                      ><i
+                        class="fa-regular fa-file-image fa-2x text-primary"
+                      ></i
+                    ></label>
+                    <input
+                      type="file"
+                      id="file"
+                      hidden
+                      (change)="editCommentImg($event)"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+
             <div class="card-body">{{ comment?.comment }}</div>
             <div class="card-body" *ngIf="comment?.commentImg != ''">
               <img

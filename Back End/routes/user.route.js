@@ -3,6 +3,10 @@ const User = require("../controllers/user.controller");
 const { auth, removeReq } = require("../middleware/auth.middleware");
 const upload = require("../middleware/upload.middleware");
 
+router.post("", (req, res) => {
+  res.send("Hello");
+});
+
 router.post("/register", User.addUser);
 router.post("/login", User.login);
 

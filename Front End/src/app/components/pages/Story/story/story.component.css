@@ -1,0 +1,9 @@
+.card {
+  height: 250px;
+  width: 250px;
+}
+
+textarea {
+  resize: none;
+  height: 120px;
+}

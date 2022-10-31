@@ -9,7 +9,7 @@ const io = socketIo(serverHttp);
 
 require("dotenv").config();
 require("../db/connect");
-require("../helper/chat.helper")(io)
+require("../helper/chat.helper")(io);
 
 server.use(express.static(path.join(__dirname, "../static")));
 server.use(express.urlencoded({ extended: true }));
@@ -31,10 +31,9 @@ server.use("/api/group", groupRoute);
 server.use("/api/story", storyRoute);
 
 server.all("*", (req, res) =>
-    res
-        .status(404)
-        .send({ apiStatus: false, data: "", message: "Url Not Corrected" })
+  res
+    .status(404)
+    .send({ apiStatus: false, data: "", message: "Url Not Corrected" })
 );
-
 
 module.exports = serverHttp;

@@ -1,28 +1,22 @@
 const mongoose = require("mongoose");
 
 const storySchema = mongoose.Schema(
-    {
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
-        content: {
-            type: String,
-            trim: true,
-        },
-        storyImg: {
-            type: String,
-            trim: true,
-            default: "",
-        },
-        createdAt: {
-            type: Date,
-            expires: "1m",
-            index: true,
-            default: Date.now,
-        },
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
     },
-    { timestamps: true }
+    content: {
+      type: String,
+      trim: true,
+    },
+    storyImg: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+  },
+  { timestamps: true }
 );
 
 const story = mongoose.model("Story", storySchema);

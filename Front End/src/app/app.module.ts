@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -19,6 +21,8 @@ import { SingleComponent } from './components/pages/Posts/single/single.componen
 import { EditPostComponent } from './components/pages/Posts/edit-post/edit-post.component';
 import { AllFriendsComponent } from './components/pages/User/all-friends/all-friends.component';
 import { FriendComponent } from './components/pages/User/friend/friend.component';
+import { StoryComponent } from './components/pages/Story/story/story.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,7 @@ import { FriendComponent } from './components/pages/User/friend/friend.component
     EditPostComponent,
     AllFriendsComponent,
     FriendComponent,
+    StoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +48,9 @@ import { FriendComponent } from './components/pages/User/friend/friend.component
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    CarouselModule,
   ],
   providers: [
     {

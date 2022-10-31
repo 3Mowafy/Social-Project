@@ -43,4 +43,16 @@ export class PostsService {
   addComment(id: any, data: any): Observable<any> {
     return this._http.post(`${this._url}addComment/${id}`, data);
   }
+
+  editComment(id: any, id_2: any, data: any): Observable<any> {
+    return this._http.patch(`${this._url}editComment/${id}/${id_2}`, data);
+  }
+
+  removeComment(id: any, id_2: any): Observable<any> {
+    return this._http.delete(`${this._url}removeComment/${id}/${id_2}`);
+  }
+
+  sharePost(id: any): Observable<any> {
+    return this._http.get(`${this._url}sharePost/${id}`);
+  }
 }

@@ -18,11 +18,17 @@ export class PostComponent implements OnInit {
   isLike = [];
   counter: any;
   isShow = false;
+
   addPost = new FormGroup({
     content: new FormControl(' '),
   });
+
   addcomment = new FormGroup({
     comment: new FormControl(' '),
+  });
+
+  editCommentValue = new FormGroup({
+    comment: new FormControl(''),
   });
   constructor(public _posts: PostsService, public _auth: AuthService) {}
 
@@ -36,6 +42,10 @@ export class PostComponent implements OnInit {
 
   addCommentImg(event: any) {
     this.file = event.target.files[0] || '';
+  }
+
+  editCommentImg(event: any) {
+    this.file = event.target.files[0];
   }
 
   postAdded() {
@@ -91,11 +101,34 @@ export class PostComponent implements OnInit {
     });
   }
 
+  removeComment(id: any, id_2: any) {
+    this._posts.removeComment(id, id_2).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
   addRemoveLike(id: any) {
     this._posts.addRemoveLike(id).subscribe((res) => {
       this.isLike = res.data.likes;
       this.counter = this.isLike.length;
       this.showPosts();
+    });
+  }
+
+  editCommentMethod(id: any, id_2: any) {
+    const form: any = this.editCommentValue.value.comment;
+    const upload = new FormData();
+    upload.append('comment', form);
+    upload.append('img', this.file);
+    this._posts.editComment(id, id_2, upload).subscribe(() => {
+      this.showPosts();
+    });
+  }
+
+  sharePost(id: any) {
+    this._posts.sharePost(id).subscribe((res) => {
+      this.showPosts();
+      console.log(res);
     });
   }
 }

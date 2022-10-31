@@ -1,0 +1,53 @@
+<section class="container mt-2">
+  <owl-carousel-o [options]="carouuselOptions">
+    <ng-template carouselSlide>
+      <div class="card">
+        <form [formGroup]="storyForm" (ngSubmit)="addStory()">
+          <div class="card-header fw-bold">Add Story</div>
+          <div class="card-body">
+            <div class="card-text">
+              <textarea
+                class="form-control"
+                placeholder="Story Content"
+                formControlName="content"
+              ></textarea>
+            </div>
+          </div>
+          <div
+            class="card-footer text-muted d-flex justify-content-between align-items-center px-4"
+          >
+            <div class="input">
+              <label for="file"
+                ><i class="fa-regular fa-file-image fa-2x text-primary"></i
+              ></label>
+              <input
+                type="file"
+                id="file"
+                hidden
+                (change)="addstoryImg($event)"
+              />
+            </div>
+            <button class="btn btn-primary">Add Story</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+    <ng-template carouselSlide>
+      <div class="card" *ngFor="let story of allStories">
+        <img
+          *ngIf="story?.['storyImg'] !=''"
+          [src]="_story.serverUrl + story?.storyImg"
+          class="card-img-top"
+          alt="Story Img"
+        />
+        {{ _story.serverUrl }}{{ story?.storyImg }}
+        <div class="card-body">
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+        </div>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</section>
